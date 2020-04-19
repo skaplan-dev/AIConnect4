@@ -1,0 +1,103 @@
+*,
+*:before
+*:after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial;
+  color: #333;
+}
+
+.container {
+  width: 700px;
+  margin: 10px auto;
+}
+
+.col {
+  display: inline-block;
+}
+
+.col--half {
+  width: 50%;
+}
+
+.align-right {
+  text-align: right;
+}
+
+.connect4-board:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+.connect4-column {
+  float: left;
+  width: 14.2857142857%;
+}
+
+.connect4-cell {
+  background: #eeeeee;
+  border-radius: 50%;
+  border: none;
+  color: #333;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 12px;
+  height: 80px;
+  margin: 10px auto;
+  outline: none;
+  padding: 0;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+  width: 80px;
+}
+
+.connect4-board--active .connect4-cell:hover {
+  background-color: #dddddd;
+}
+
+.connect4-board--inactive .connect4-cell {
+  cursor: default;
+}
+
+.connect4-cell.connect4-cell--red {
+  background-color: #801515 !important;
+}
+
+.connect4-cell.connect4-cell--blue {
+  background-color: #231858 !important;
+}
+
+.connect4-cell.connect4-cell--mini {
+  cursor: default;
+  height: 30px;
+  margin: 0;
+  width: 30px;
+}
+
+.connect4-status {
+  margin: 20px 0;
+}
+
+.connect4-status-nextturn {
+  height: 30px;
+}
+
+.connect4-restart {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.connect4-label {
+  font-size: 20px;
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 10px;
+}
+
+.connect4-label.connect4-label--failure {
+  color: #801515;
+}
