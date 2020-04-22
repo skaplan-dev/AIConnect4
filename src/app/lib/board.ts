@@ -1,4 +1,5 @@
 import matches from "./matches";
+import {HEIGHT, WIDTH} from './variables';
 
 /**
  * Board class
