@@ -64,7 +64,7 @@ export default class Board {
   addPiece(columnIndex, piece) {
     // Column and piece index
 //     let column = this.grid[columnIndex];
-    let cellIndex = -1;
+    let rowIndex = -1;
 
     // Loops through column, looking for zeros (to determine next available cell)
 //     column.forEach((columnPiece, i) => {
@@ -76,13 +76,13 @@ export default class Board {
     // Loops through column, looking for zeros (to determine next available cell)
     for(let row = HEIGHT - 1; row >= 0; row--) {
       if(this.grid[row][columnIndex] == 0)
-        cellIndex = row;
+        rowIndex = row;
     }
 
     // Did we find an available cell?
-    if (cellIndex >= 0) {
+    if (rowIndex >= 0) {
       // Adds piece to column cell
-      this.grid[cellIndex][columnIndex] = piece;
+      this.grid[rowIndex][columnIndex] = piece;
 
       // Increase inserts count
       this.inserts++;
