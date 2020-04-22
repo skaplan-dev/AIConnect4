@@ -1,9 +1,10 @@
+import {HEIGHT, WIDTH} from './variables';
 export default Matches;
 
 function Matches(grid, player) {
   // horizontalCheck
-  for (let j = 0; j < 4; j++) {
-    for (let i = 0; i < 7; i++) {
+  for (let j = 0; j < WIDTH - 3; j++) {
+    for (let i = 0; i < HEIGHT; i++) {
       if (
         grid[i][j] == player &&
         grid[i][j + 1] == player &&
@@ -15,8 +16,8 @@ function Matches(grid, player) {
     }
   }
   // verticalCheck
-  for (let i = 0; i < 4; i++) {
-    for (let j = 0; j < 7; j++) {
+  for (let i = 0; i < HEIGHT - 3; i++) {
+    for (let j = 0; j < WIDTH; j++) {
       if (
         grid[i][j] == player &&
         grid[i + 1][j] == player &&
@@ -28,8 +29,8 @@ function Matches(grid, player) {
     }
   }
   // ascendingDiagonalCheck
-  for (let i = 3; i < 7; i++) {
-    for (let j = 0; j < 3; j++) {
+  for (let i = 3; i < HEIGHT; i++) {
+    for (let j = 0; j < WIDTH - 3; j++) {
       if (
         grid[i][j] == player &&
         grid[i - 1][j + 1] == player &&
@@ -40,8 +41,8 @@ function Matches(grid, player) {
     }
   }
   // descendingDiagonalCheck
-  for (let i = 3; i < 7; i++) {
-    for (let j = 3; j < 6; j++) {
+  for (let i = 3; i < HEIGHT; i++) {
+    for (let j = 3; j < WIDTH; j++) {
       if (
         grid[i][j] == player &&
         grid[i - 1][j - 1] == player &&
