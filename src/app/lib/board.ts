@@ -8,6 +8,8 @@ export default class Board {
   public inserts;
   public nextPlayer;
   public isActive: boolean;
+  public static readonly HEIGHT = 6;
+  public static readonly WIDTH = 7;
   /**
    * Board constructor
    * @return {Void}
@@ -17,14 +19,22 @@ export default class Board {
      * Multidimentional array containing our default empty grid
      * @type {Array}
      */
+//     this.grid = [
+//       [0, 0, 0, 0, 0, 0],
+//       [0, 0, 0, 0, 0, 0],
+//       [0, 0, 0, 0, 0, 0],
+//       [0, 0, 0, 0, 0, 0],
+//       [0, 0, 0, 0, 0, 0],
+//       [0, 0, 0, 0, 0, 0],
+//       [0, 0, 0, 0, 0, 0]
+//     ];
     this.grid = [
-      [0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0]
     ];
 
     /**
@@ -53,20 +63,26 @@ export default class Board {
    */
   addPiece(columnIndex, piece) {
     // Column and piece index
-    let column = this.grid[columnIndex];
+//     let column = this.grid[columnIndex];
     let cellIndex = -1;
 
     // Loops through column, looking for zeros (to determine next available cell)
-    column.forEach((columnPiece, i) => {
-      if (columnPiece === 0) {
-        cellIndex = i;
-      }
-    });
+//     column.forEach((columnPiece, i) => {
+//       if (columnPiece === 0) {
+//         cellIndex = i;
+//       }
+//     });
+    
+    // Loops through column, looking for zeros (to determine next available cell)
+    for(let row = HEIGHT - 1; row >= 0; row--) {
+      if(this.grid[row][columnIndex] == 0)
+        cellIndex = row;
+    }
 
     // Did we find an available cell?
     if (cellIndex >= 0) {
       // Adds piece to column cell
-      column[cellIndex] = piece;
+      this.grid[cellIndex][columnIndex] = piece;
 
       // Increase inserts count
       this.inserts++;
@@ -100,7 +116,7 @@ export default class Board {
  * List of available players
  * @type {Array}
  */
-let availablePlayers = ["red", "blue"];
+let availablePlayers = ["AI", "person"];
 
 /**
  * Whose turn is it to play?
