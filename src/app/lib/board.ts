@@ -8,8 +8,7 @@ export default class Board {
   public inserts;
   public nextPlayer;
   public isActive: boolean;
-  public static readonly HEIGHT = 6;
-  public static readonly WIDTH = 7;
+  
   /**
    * Board constructor
    * @return {Void}
