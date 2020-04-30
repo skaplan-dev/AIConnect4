@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "connect-4-ai-271719"
+  },
+  "targets": {
+    "connect-4-ai-271719": {
+      "hosting": {
+        "AIConnect4": [
+          "connect-4-ai-271719"
+        ]
+      }
+    }
   }
 }

@@ -32,10 +32,10 @@ body {
   clear: both;
 }
 
-.connect4-column {
+/* .connect4-column {
   float: left;
   width: 14.2857142857%;
-}
+} */
 
 .connect4-cell {
   background: #eeeeee;
@@ -45,14 +45,14 @@ body {
   cursor: pointer;
   display: inline-block;
   font-size: 12px;
-  height: 80px;
+  height: 65px;
   margin: 10px auto;
   outline: none;
   padding: 0;
   text-align: center;
   text-decoration: none;
   vertical-align: middle;
-  width: 80px;
+  width: 65px;
 }
 
 .connect4-board--active .connect4-cell:hover {

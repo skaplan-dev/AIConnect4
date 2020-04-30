@@ -1,0 +1,8 @@
+{
+  "/api/*": {
+    "target": "https://us-central1-connect-4-ai-271719.cloudfunctions.net",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  }
+}

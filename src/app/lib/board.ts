@@ -1,6 +1,17 @@
 import matches from "./matches";
-import {HEIGHT, WIDTH} from './variables';
+import { HEIGHT, WIDTH } from "./variables";
 
+/**
+ * List of available players
+ * @type {Array}
+ */
+let availablePlayers = ["person", "AI"];
+let algorithms = [
+  "MiniMaxAlphaBeta",
+  "MonteCarloTreeSearch",
+  "Random",
+  "Conglomerate",
+];
 /**
  * Board class
  */
@@ -9,7 +20,9 @@ export default class Board {
   public inserts;
   public nextPlayer;
   public isActive: boolean;
-  
+  public gameOver: boolean;
+  public algo: string;
+  public aiWin: boolean;
   /**
    * Board constructor
    * @return {Void}
@@ -19,22 +32,13 @@ export default class Board {
      * Multidimentional array containing our default empty grid
      * @type {Array}
      */
-//     this.grid = [
-//       [0, 0, 0, 0, 0, 0],
-//       [0, 0, 0, 0, 0, 0],
-//       [0, 0, 0, 0, 0, 0],
-//       [0, 0, 0, 0, 0, 0],
-//       [0, 0, 0, 0, 0, 0],
-//       [0, 0, 0, 0, 0, 0],
-//       [0, 0, 0, 0, 0, 0]
-//     ];
     this.grid = [
       [0, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0]
+      [0, 0, 0, 0, 0, 0, 0],
     ];
 
     /**
@@ -42,6 +46,8 @@ export default class Board {
      * @type {Number}
      */
     this.inserts = 0;
+    const randomKey = Math.floor(Math.random() * 3);
+    this.algo = algorithms[randomKey];
 
     /**
      * String containing next player
@@ -54,6 +60,7 @@ export default class Board {
      * @type {Boolean}
      */
     this.isActive = true;
+    this.gameOver = false;
   }
 
   /**
@@ -63,20 +70,11 @@ export default class Board {
    */
   addPiece(columnIndex, piece) {
     // Column and piece index
-//     let column = this.grid[columnIndex];
     let rowIndex = -1;
 
     // Loops through column, looking for zeros (to determine next available cell)
-//     column.forEach((columnPiece, i) => {
-//       if (columnPiece === 0) {
-//         cellIndex = i;
-//       }
-//     });
-    
-    // Loops through column, looking for zeros (to determine next available cell)
-    for(let row = HEIGHT - 1; row >= 0; row--) {
-      if(this.grid[row][columnIndex] == 0)
-        rowIndex = row;
+    for (let row = 0; row < HEIGHT; row++) {
+      if (this.grid[row][columnIndex] == 0) rowIndex = row;
     }
 
     // Did we find an available cell?
@@ -89,6 +87,8 @@ export default class Board {
 
       if (this.didSomebodyWin(this.nextPlayer)) {
         this.isActive = false;
+        this.gameOver = true;
+        this.aiWin = this.nextPlayer == "AI" ? true : false;
       }
 
       // Who's the next player?
@@ -105,18 +105,6 @@ export default class Board {
     return matches(this.grid, player);
   }
 }
-
-/**
- *
- * Private properties
- *
- */
-
-/**
- * List of available players
- * @type {Array}
- */
-let availablePlayers = ["AI", "person"];
 
 /**
  * Whose turn is it to play?

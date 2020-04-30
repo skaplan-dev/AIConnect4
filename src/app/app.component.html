@@ -1,23 +1,85 @@
-<div id="app" class="container">
+<div id="app" class="container mt-5">
   <h1>Connect Four</h1>
+  <h5>
+    Playing Against AI:
+    {{ board.algo }}
+  </h5>
   <div class="connect4-status">
     <button class="connect4-restart" (click)="restart()">Restart</button>
     <div
       class="connect4-label connect4-label--failure"
-      *ngIf="!board.isActive"
+      *ngIf="!board.isActive && !board.gameOver"
     >
-      Game over!
+      AI is thinking...
+    </div>
+    <div class="connect4-label connect4-label--failure" *ngIf="board.gameOver">
+      Game Over
     </div>
   </div>
+
   <div class="connect4-board connect4-board--active">
-    <div *ngFor="let column of board.grid; index as y" class="connect4-column">
-      <button
-        class="connect4-cell"
-        *ngFor="let cell of column"
-        [class.connect4-cell--red]="cell == 'red'"
-        [class.connect4-cell--blue]="cell == 'blue'"
-        (click)="addPiece(y)"
-      ></button>
+    <div *ngFor="let column of board.grid" class="connect4-column">
+      <div class="row">
+        <div class="col" *ngFor="let cell of column; index as y">
+          <button
+            class="connect4-cell"
+            [class.connect4-cell--red]="cell == 'AI'"
+            [class.connect4-cell--blue]="cell == 'person'"
+            (click)="addPiece(y)"
+          ></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="stats" class="row mt-5">
+    <div class="col text-center">
+      {{ stats[0].type }}
+      <hr />
+      Games Played: {{ stats[0].data.gamesPlayed }}
+      <div>
+        Win Rate:
+        {{
+          getWinPercentage(stats[0].data.gamesWon, stats[0].data.gamesPlayed)
+            | percent
+        }}
+      </div>
+    </div>
+    <div class="col text-center">
+      {{ stats[1].type }}
+      <hr />
+      Games Played: {{ stats[1].data.gamesPlayed }}
+      <div>
+        Win Rate:
+        {{
+          getWinPercentage(stats[1].data.gamesWon, stats[1].data.gamesPlayed)
+            | percent
+        }}
+      </div>
+    </div>
+    <div class="col text-center">
+      {{ stats[2].type }}
+      <hr />
+      Games Played: {{ stats[2].data.gamesPlayed }}
+      <div>
+        Win Rate:
+        {{
+          getWinPercentage(stats[2].data.gamesWon, stats[2].data.gamesPlayed)
+            | percent
+        }}
+      </div>
+    </div>
+    <div class="col text-center">
+      {{ stats[3].type }}
+      <hr />
+      Games Played: {{ stats[3].data.gamesPlayed }}
+      <div>
+        Win Rate:
+        {{
+          getWinPercentage(stats[3].data.gamesWon, stats[2].data.gamesPlayed)
+            | percent
+        }}
+      </div>
     </div>
   </div>
 </div>
